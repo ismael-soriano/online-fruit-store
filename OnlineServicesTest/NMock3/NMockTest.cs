@@ -17,7 +17,7 @@ namespace NMockTests
 		//
 		// For more samples and tutorials: http://nmock3.codeplex.com
 		//
-
+        /*
 		private MockFactory _factory = new MockFactory();
 
 		[TestCleanup]
@@ -106,6 +106,6 @@ namespace NMockTests
 			{
 				Status = "Event Fired!";
 			}
-		}
+		}*/
 	}
 }
