@@ -12,11 +12,16 @@ namespace Infrastructure
     public class ShopDbContext : DbContext, IDbContext, IUnitOfWork
     {
         public DbSet<Product> Products {get; set;} // Needed for database seed purposes.
+        public DbSet<Ticket> Tickets { get; set; }
 
         public ShopDbContext()
             : base("DefaultConnection")
         {
             
+        }
+
+        protected override void OnModelCreating(DbModelBuilder mb)
+        {
         }
 
         public DbSet<TEntity> GetSet<TEntity>() where TEntity : class

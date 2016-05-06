@@ -8,6 +8,7 @@ namespace Domain.Tickets
 {
     public interface IRepositoryTicket
     {
+        Ticket Add(Ticket ticket);
         IEnumerable<Ticket> GetAll();
         Ticket Get(int id);
         void Update(Ticket ticket);

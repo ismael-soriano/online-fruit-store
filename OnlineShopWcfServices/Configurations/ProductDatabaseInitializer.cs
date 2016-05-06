@@ -12,7 +12,6 @@ namespace OnlineShopWcfServices.Configurations
     {
         protected override void Seed(ShopDbContext context)
         {
-            var productRepository = context.GetSet<Product>();
             IList<Product> defaultProducts = new List<Product>();
 
             defaultProducts.Add(new Product() { Id = 1, Name = "Manzana", Price = 1 });
@@ -20,7 +19,7 @@ namespace OnlineShopWcfServices.Configurations
             defaultProducts.Add(new Product() { Id = 3, Name = "Naranja", Price = 1.32m });
 
             foreach (Product product in defaultProducts)
-                productRepository.Add(product);
+                context.Products.Add(product);
 
             base.Seed(context);
         }

@@ -46,14 +46,6 @@ namespace OnlineServicesTest
             var unitOfWork = _factory.CreateMock<IUnitOfWork>();
             var service = new TicketService(repository.MockObject, unitOfWork.MockObject);
 
-            //var date = DateTime.Now;
-            //var details = new HashSet<TicketDetail>() {
-            //    new TicketDetail() { Product = new Product() {Name = PRODUCT_NAME, Price = PRODUCT_PRICE}, Quantity = DETAIL_QUANTITY, Price = DETAIL_PRICE }
-            //};
-
-            //var tickets = new HashSet<Ticket>() {
-            //    new Ticket() {Id= 1, Date = date, Details = details}
-            //};
             var tickets = new HashSet<Ticket>() { ticket };
             repository.Expects.One.Method(c => c.GetAll()).WillReturn(tickets);
 
@@ -72,13 +64,6 @@ namespace OnlineServicesTest
             var repository = _factory.CreateMock<IRepositoryTicket>();
             var unitOfWork = _factory.CreateMock<IUnitOfWork>();
             var service = new TicketService(repository.MockObject, unitOfWork.MockObject);
-
-            var date = DateTime.Now;
-            var details = new HashSet<TicketDetail>() {
-                new TicketDetail() {Id = 1, Product = new Product() {Name = PRODUCT_NAME, Price = PRODUCT_PRICE}, Quantity = DETAIL_QUANTITY, Price = DETAIL_PRICE}
-            };
-
-            var ticket = new Ticket() { Id = 1, Date = date, Details = details };
 
             repository.Expects.One.MethodWith(c => c.Get(1)).WillReturn(ticket);
 

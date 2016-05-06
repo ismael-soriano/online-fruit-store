@@ -31,6 +31,13 @@ namespace OnlineShopWcfServices
         public void Update(Domain.Tickets.Ticket ticket)
         {
             _repository.Update(ticket);
+            SaveChanges();
+        }
+
+        public void Add(Ticket ticket)
+        {
+            _repository.Add(ticket);
+            SaveChanges();
         }
     }
 }

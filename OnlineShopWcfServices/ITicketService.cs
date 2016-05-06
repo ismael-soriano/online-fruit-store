@@ -13,13 +13,19 @@ namespace OnlineShopWcfServices
     public interface ITicketService
     {
         [OperationContract]
-        [WebGet(UriTemplate = "Tickets", ResponseFormat = WebMessageFormat.Json)]
-        IEnumerable<Ticket> GetAll();
+        [WebInvoke(Method = "POST", UriTemplate = "AddTicket", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        void Add(Ticket ticket);
 
         [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "UpdateTicket", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+        void Update(Ticket ticket);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "Ticket?id={id}", ResponseFormat = WebMessageFormat.Json)]
         Ticket Get(int id);
 
         [OperationContract]
-        void Update(Ticket ticket);
+        [WebGet(UriTemplate = "Tickets", ResponseFormat = WebMessageFormat.Json)]
+        IEnumerable<Ticket> GetAll();
     }
 }

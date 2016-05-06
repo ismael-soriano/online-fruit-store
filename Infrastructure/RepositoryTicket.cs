@@ -28,5 +28,10 @@ namespace Infrastructure
         {
             Modify(ticket);
         }
+
+        public Ticket Add(Ticket ticket)
+        {
+            return Entity.Add(ticket);
+        }
     }
 }
