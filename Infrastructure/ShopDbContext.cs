@@ -11,8 +11,13 @@ namespace Infrastructure
 {
     public class ShopDbContext : DbContext, IDbContext, IUnitOfWork
     {
-        public DbSet<Product> Products;
-        public DbSet<Ticket> Tickets;
+        public DbSet<Product> Products {get; set;} // Needed for database seed purposes.
+
+        public ShopDbContext()
+            : base("DefaultConnection")
+        {
+            
+        }
 
         public DbSet<TEntity> GetSet<TEntity>() where TEntity : class
         {

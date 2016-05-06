@@ -26,7 +26,7 @@ namespace Infrastructure
 
         public void Update(Ticket ticket)
         {
-            throw new NotImplementedException();
+            Modify(ticket);
         }
     }
 }

@@ -16,11 +16,11 @@ namespace OnlineShopWcfServices.Configurations
             var builder = new ContainerBuilder();
 
             // Register your service implementations.
-            builder.RegisterType<ProductService>().As<IProductService>();
-            builder.RegisterType<TicketService>().As<ITicketService>();
+            builder.RegisterType<ShopDbContext>().As<IDbContext>().As<IUnitOfWork>().InstancePerLifetimeScope();
             builder.RegisterType<RepositoryProduct>().As<IRepositoryProduct>();
             builder.RegisterType<RepositoryTicket>().As<IRepositoryTicket>();
-            builder.RegisterType<ShopDbContext>().As<IDbContext>().As<IUnitOfWork>().InstancePerLifetimeScope();
+            builder.RegisterType<OnlineShopWcfServices.ProductService>().As<IProductService>();
+            builder.RegisterType<OnlineShopWcfServices.TicketService>().As<ITicketService>();
 
             // Set the dependency resolver.
             return builder.Build();

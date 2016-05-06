@@ -35,7 +35,6 @@ namespace OnlineServicesTest
                 new Product() {Name = PRODUCT_NAME, Price = PRODUCT_PRICE}
             };
             repository.Expects.One.Method(c => c.GetAll()).WillReturn(products);
-            //unitOfWork.Expects.One.Method(c => c.Dispose());
 
             // Act
             var result = new List<Product> (service.GetAll());

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using System.ServiceModel.Web;
 using System.Text;
 
 namespace OnlineShopWcfServices
@@ -12,6 +13,7 @@ namespace OnlineShopWcfServices
     public interface ITicketService
     {
         [OperationContract]
+        [WebGet(UriTemplate = "Tickets", ResponseFormat = WebMessageFormat.Json)]
         IEnumerable<Ticket> GetAll();
 
         [OperationContract]

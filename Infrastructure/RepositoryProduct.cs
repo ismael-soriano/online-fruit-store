@@ -10,7 +10,7 @@ namespace Infrastructure
 {
     public class RepositoryProduct : RepositoryBase<Product>, IRepositoryProduct
     {
-        public RepositoryProduct(ShopDbContext context) : base(context)
+        public RepositoryProduct(IDbContext context) : base(context)
         {
             
         }

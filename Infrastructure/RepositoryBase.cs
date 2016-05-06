@@ -24,5 +24,10 @@ namespace Infrastructure
                 return _context.GetSet<T>();
             }
         }
+
+        protected void Modify(T entity)
+        {
+            _context.Entry<T>(entity).State = System.Data.EntityState.Modified;
+        }
     }
 }

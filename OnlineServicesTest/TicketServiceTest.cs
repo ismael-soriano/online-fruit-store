@@ -12,12 +12,24 @@ namespace OnlineServicesTest
     [TestClass]
     public class TicketServiceTest
     {
+        private const int FIRST = 0;
         private const int DETAILS_COUNT = 1;
         private const decimal DETAIL_QUANTITY = 4;
         private const decimal DETAIL_PRICE = 14;
         private const string PRODUCT_NAME = "manzana";
         private const decimal PRODUCT_PRICE = 3.5m;
         private MockFactory _factory = new MockFactory();
+        TicketDetail detail;
+        Ticket ticket;
+        DateTime date;
+        
+        [TestInitialize]
+        public void Initialize()
+        {
+            date = DateTime.Now;
+            detail = new TicketDetail() { Product = new Product() { Name = PRODUCT_NAME, Price = PRODUCT_PRICE }, Quantity = DETAIL_QUANTITY, Price = DETAIL_PRICE };
+            ticket = new Ticket() { Id = 1, Date = date, Details = new List<TicketDetail>() { detail } };
+        }
 
         [TestCleanup]
         public void Cleanup()
@@ -34,23 +46,23 @@ namespace OnlineServicesTest
             var unitOfWork = _factory.CreateMock<IUnitOfWork>();
             var service = new TicketService(repository.MockObject, unitOfWork.MockObject);
 
-            var date = DateTime.Now;
-            var details = new HashSet<TicketDetail>() {
-                new TicketDetail() { Product = new Product() {Name = PRODUCT_NAME, Price = PRODUCT_PRICE}, Quantity = DETAIL_QUANTITY, Price = DETAIL_PRICE }
-            };
+            //var date = DateTime.Now;
+            //var details = new HashSet<TicketDetail>() {
+            //    new TicketDetail() { Product = new Product() {Name = PRODUCT_NAME, Price = PRODUCT_PRICE}, Quantity = DETAIL_QUANTITY, Price = DETAIL_PRICE }
+            //};
 
-            var tickets = new HashSet<Ticket>() {
-                new Ticket() {Id= 1, Date = date, Details = details}
-            };
+            //var tickets = new HashSet<Ticket>() {
+            //    new Ticket() {Id= 1, Date = date, Details = details}
+            //};
+            var tickets = new HashSet<Ticket>() { ticket };
             repository.Expects.One.Method(c => c.GetAll()).WillReturn(tickets);
-            //unitOfWork.Expects.One.Method(c => c.Dispose());
 
             // Act
             var result = new List<Ticket>(service.GetAll());
 
             // Assert
-            Assert.AreEqual(1, result.Count);
-            Assert.AreEqual(date, result[0].Date);
+            Assert.AreEqual(DETAILS_COUNT, result.Count);
+            Assert.AreEqual(date, result[FIRST].Date);
         }
 
         [TestMethod]
@@ -63,13 +75,12 @@ namespace OnlineServicesTest
 
             var date = DateTime.Now;
             var details = new HashSet<TicketDetail>() {
-                new TicketDetail() {Id = 1, Product = new Product() {Name = "manzana", Price = 3.5m}, Quantity = 4}
+                new TicketDetail() {Id = 1, Product = new Product() {Name = PRODUCT_NAME, Price = PRODUCT_PRICE}, Quantity = DETAIL_QUANTITY, Price = DETAIL_PRICE}
             };
 
             var ticket = new Ticket() { Id = 1, Date = date, Details = details };
 
             repository.Expects.One.MethodWith(c => c.Get(1)).WillReturn(ticket);
-            //unitOfWork.Expects.One.Method(c => c.Dispose());
 
             // Act
             var result = service.Get(1);
