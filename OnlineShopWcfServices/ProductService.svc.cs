@@ -10,10 +10,10 @@ using Core;
 
 namespace OnlineShopWcfServices
 {
-    public class ProductService : IProductService
+    public class ProductService : ServiceBase, IProductService
     {
         readonly IRepositoryProduct _repository;
-        public ProductService(IRepositoryProduct repository)
+        public ProductService(IRepositoryProduct repository, IUnitOfWork unitOfWork) : base(unitOfWork)
         {
             Check.NotNull(repository, "repository");
             _repository = repository;

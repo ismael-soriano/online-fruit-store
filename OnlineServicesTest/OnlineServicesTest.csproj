@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>7aaaa383-9e03-48a2-889c-eec14a4aea4e</ProjectGuid>
+    <ProjectGuid>{01043A7C-88B8-4FA1-838A-DBF22FEFD605}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OnlineServicesTest</RootNamespace>
@@ -35,7 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NMock3, Version=3.5.44.0, Culture=neutral, PublicKeyToken=cf53a760d95f4c33, processorArchitecture=MSIL">
+      <HintPath>..\packages\NMock3.3.5.44\lib\net40\NMock3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data.Entity" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -50,8 +60,33 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="NMock3\NMockTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProductServiceTest.cs" />
+    <Compile Include="TicketServiceTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="NMock3\NMock3 Cheat Sheet.pdf" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{48acd1d2-3fbd-47ed-918d-3ced12338489}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{f6f62d12-670f-4974-8cb1-f4b15aee25fb}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{902e0585-fa4e-4522-bb64-3fab58aa4b41}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OnlineShopWcfServices\OnlineShopWcfServices.csproj">
+      <Project>{274577a1-27d3-4c5e-8cb7-dc246206916a}</Project>
+      <Name>OnlineShopWcfServices</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

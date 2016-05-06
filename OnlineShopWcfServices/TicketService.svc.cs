@@ -1,5 +1,6 @@
 ﻿using Core;
 using Domain.Tickets;
+using Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ using System.Text;
 
 namespace OnlineShopWcfServices
 {
-    public class TicketService : ITicketService
+    public class TicketService : ServiceBase, ITicketService
     {
         readonly IRepositoryTicket _repository;
-        public TicketService(IRepositoryTicket repository)
+        public TicketService(IRepositoryTicket repository, IUnitOfWork unitOfWork) : base(unitOfWork)
         {
             Check.NotNull(repository, "repository");
             _repository = repository;
